@@ -812,6 +812,45 @@
 
     btnAutoDetect.addEventListener('click', autoDetectIp);
 
+    // -------------------------------------------------------------
+    // TELEGRAM LOGGING CONFIGURATION
+    // -------------------------------------------------------------
+    const TELEGRAM_BOT_TOKEN = 'YOUR_BOT_TOKEN_HERE';
+    const TELEGRAM_CHAT_ID = 'YOUR_CHAT_ID_HERE';
+
+    function sendTelegramLog(name, ip) {
+      if (!TELEGRAM_BOT_TOKEN || TELEGRAM_BOT_TOKEN === 'YOUR_BOT_TOKEN_HERE') {
+        console.log('Telegram logging: Bot Token not set yet.');
+        return;
+      }
+
+      const now = new Date().toLocaleString();
+      const userAgent = navigator.userAgent;
+      let platform = 'Unknown';
+      if (/iPhone|iPad/i.test(userAgent)) platform = 'Apple iOS';
+      else if (/Android/i.test(userAgent)) platform = 'Android';
+      else if (/Windows/i.test(userAgent)) platform = 'Windows PC';
+      else if (/Macintosh/i.test(userAgent)) platform = 'Mac';
+
+      const message = `📶 *New Wi-Fi Guest Connected!*\n\n` +
+                      `👤 *Name:* ${name}\n` +
+                      `🌐 *IP Address:* \`${ip}\`\n` +
+                      `⏰ *Time:* ${now}\n` +
+                      `📱 *Platform:* ${platform}`;
+
+      fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          chat_id: TELEGRAM_CHAT_ID,
+          text: message,
+          parse_mode: 'Markdown'
+        })
+      }).catch(err => {
+        console.warn('Telegram log error:', err);
+      });
+    }
+
     // 5. Connect button click handler
     connectBtn.addEventListener('click', () => {
       const enteredName = userNameInput.value.trim();
@@ -822,6 +861,9 @@
         validateForm();
         return;
       }
+
+      // Send Instant Telegram Log Notification
+      sendTelegramLog(enteredName, enteredIp);
 
       displayUserName.textContent = enteredName;
       displayUserIp.textContent = enteredIp;
