@@ -129,6 +129,163 @@
       margin-bottom: 24px;
     }
 
+    /* Form Inputs */
+    .form-group {
+      text-align: left;
+      margin-bottom: 16px;
+    }
+
+    .label-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .input-label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .label-row .input-label {
+      margin-bottom: 0;
+    }
+
+    .portal-input {
+      width: 100%;
+      height: 44px;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 10px;
+      padding: 0 14px;
+      font-size: 0.94rem;
+      color: #ffffff;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    .portal-input:focus {
+      border-color: #0066ff;
+      background: rgba(15, 23, 42, 0.9);
+      box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.25);
+    }
+
+    .portal-input::placeholder {
+      color: #64748b;
+    }
+
+    .btn-detect-badge {
+      background: rgba(0, 102, 255, 0.2);
+      border: 1px solid rgba(0, 102, 255, 0.4);
+      color: #93c5fd;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-detect-badge:hover {
+      background: rgba(0, 102, 255, 0.4);
+      color: #ffffff;
+    }
+
+    .help-link-wrapper {
+      margin-top: 6px;
+      text-align: right;
+    }
+
+    .helper-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.78rem;
+      color: #60a5fa;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .helper-link:hover {
+      color: #93c5fd;
+      text-decoration: underline;
+    }
+
+    /* IP Guide Container */
+    .ip-guide-container {
+      display: none;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(96, 165, 250, 0.3);
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 18px;
+      text-align: left;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    }
+
+    .ip-guide-container.show {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .ip-guide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #93c5fd;
+      margin-bottom: 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 6px;
+    }
+
+    .btn-close-guide {
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      font-size: 1.2rem;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .btn-close-guide:hover {
+      color: #ffffff;
+    }
+
+    .ip-guide-content {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .guide-item {
+      margin-bottom: 10px;
+    }
+
+    .guide-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .guide-item strong {
+      color: #f1f5f9;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .guide-item code {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 1px 5px;
+      border-radius: 4px;
+      color: #60a5fa;
+      font-family: monospace;
+    }
+
     /* Terms Box */
     .terms-container {
       background: rgba(15, 23, 42, 0.6);
@@ -395,10 +552,52 @@
       </div>
 
 
-      <h1>Welcome to Lapin Wifi </h1>
+      <h1>Welcome to Lapin Wifi</h1>
       <p class="subtitle">
-        Fast and complimentary Wi-Fi is available. Please review and accept the terms of service below to connect.
+        Fast and complimentary Wi-Fi is available. Please enter your details and accept the terms below to connect.
       </p>
+
+      <!-- Input Fields for Name & IP Address -->
+      <div class="form-group">
+        <label for="user-name" class="input-label">Your Name / Device Name</label>
+        <input type="text" id="user-name" class="portal-input" placeholder="e.g. John or My iPhone" autocomplete="name">
+      </div>
+
+      <div class="form-group">
+        <div class="label-row">
+          <label for="user-ip" class="input-label">Phone IP Address</label>
+          <button type="button" class="btn-detect-badge" id="btn-auto-detect" title="Detect IP">Auto-Detect</button>
+        </div>
+        <input type="text" id="user-ip" class="portal-input" placeholder="e.g. 192.168.1.56">
+        <div class="help-link-wrapper">
+          <a href="#how-to-find-ip" id="find-ip-link" class="helper-link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            Don't know your phone's IP? Click here to find it
+          </a>
+        </div>
+      </div>
+
+      <!-- IP Guide Modal / Card -->
+      <div id="ip-guide-modal" class="ip-guide-container">
+        <div class="ip-guide-header">
+          <span>How to find your Phone's IP Address</span>
+          <button type="button" id="close-ip-guide" class="btn-close-guide">&times;</button>
+        </div>
+        <div class="ip-guide-content">
+          <div class="guide-item">
+            <strong>🍏 On iPhone (iOS):</strong>
+            <p>1. Open <b>Settings</b> &rarr; tap <b>Wi-Fi</b>.<br>
+               2. Tap the blue <b>ⓘ</b> info icon next to <b>Lapin Wifi</b>.<br>
+               3. Scroll down to see your <b>IP Address</b> (e.g. <code>192.168.1.56</code>).</p>
+          </div>
+          <div class="guide-item">
+            <strong>🤖 On Android:</strong>
+            <p>1. Open <b>Settings</b> &rarr; tap <b>Network &amp; internet / Wi-Fi</b>.<br>
+               2. Tap the <b>⚙️ Gear icon</b> next to <b>Lapin Wifi</b>.<br>
+               3. Tap <b>Advanced</b> or <b>View more</b> &rarr; see your <b>IP address</b>.</p>
+          </div>
+        </div>
+      </div>
 
       <div class="terms-container">
         <label class="checkbox-label" for="terms-checkbox">
@@ -432,7 +631,7 @@
     <div id="state-connecting" class="state-section">
       <div class="spinner"></div>
       <div class="connecting-status">Connecting to network...</div>
-      <div class="connecting-subtext">Verifying credentials and allocating session</div>
+      <div class="connecting-subtext" id="connecting-user-detail">Verifying credentials and allocating session</div>
     </div>
 
     <!-- STATE 3: SUCCESS CONFIRMATION -->
@@ -452,7 +651,15 @@
       <div class="session-info">
         <div class="session-info-row">
           <span class="info-label">Network:</span>
-          <span class="info-value">[MY WIFI]</span>
+          <span class="info-value">Lapin Wifi</span>
+        </div>
+        <div class="session-info-row">
+          <span class="info-label">User / Device:</span>
+          <span class="info-value" id="display-user-name">Guest</span>
+        </div>
+        <div class="session-info-row">
+          <span class="info-label">Device IP:</span>
+          <span class="info-value" id="display-user-ip">Auto-assigned</span>
         </div>
         <div class="session-info-row">
           <span class="info-label">Status:</span>
@@ -479,9 +686,20 @@
     const toggleTermsBtn = document.getElementById('toggle-terms-btn');
     const termsDetails = document.getElementById('terms-details');
 
+    const userNameInput = document.getElementById('user-name');
+    const userIpInput = document.getElementById('user-ip');
+    const findIpLink = document.getElementById('find-ip-link');
+    const ipGuideModal = document.getElementById('ip-guide-modal');
+    const closeIpGuide = document.getElementById('close-ip-guide');
+    const btnAutoDetect = document.getElementById('btn-auto-detect');
+
     const stateWelcome = document.getElementById('state-welcome');
     const stateConnecting = document.getElementById('state-connecting');
     const stateSuccess = document.getElementById('state-success');
+
+    const displayUserName = document.getElementById('display-user-name');
+    const displayUserIp = document.getElementById('display-user-ip');
+    const connectingUserDetail = document.getElementById('connecting-user-detail');
 
     // 1. Enable/disable button based on checkbox
     termsCheckbox.addEventListener('change', () => {
@@ -495,8 +713,45 @@
       termsDetails.classList.toggle('show');
     });
 
-    // 3. Connect button click handler
+    // 3. Toggle IP Guide Modal
+    findIpLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      ipGuideModal.classList.toggle('show');
+    });
+
+    closeIpGuide.addEventListener('click', () => {
+      ipGuideModal.classList.remove('show');
+    });
+
+    // 4. Auto-detect public/WAN IP via fast external service
+    async function autoDetectIp() {
+      btnAutoDetect.textContent = 'Detecting...';
+      try {
+        const response = await fetch('https://api.ipify.org?format=json', { cache: 'no-store' });
+        const data = await response.json();
+        if (data && data.ip) {
+          userIpInput.value = data.ip;
+          btnAutoDetect.textContent = 'Detected ✓';
+        }
+      } catch (err) {
+        btnAutoDetect.textContent = 'Enter below';
+      }
+      setTimeout(() => {
+        btnAutoDetect.textContent = 'Auto-Detect';
+      }, 3000);
+    }
+
+    btnAutoDetect.addEventListener('click', autoDetectIp);
+
+    // 5. Connect button click handler
     connectBtn.addEventListener('click', () => {
+      const enteredName = userNameInput.value.trim() || 'Guest';
+      const enteredIp = userIpInput.value.trim() || 'DHCP-Assigned';
+
+      displayUserName.textContent = enteredName;
+      displayUserIp.textContent = enteredIp;
+      connectingUserDetail.textContent = `Authenticating ${enteredName} (${enteredIp})...`;
+
       // Transition from Welcome -> Connecting
       stateWelcome.classList.remove('active');
       stateConnecting.classList.add('active');
