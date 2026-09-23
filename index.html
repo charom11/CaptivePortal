@@ -590,7 +590,8 @@
       <!-- Input Fields for Name & IP Address -->
       <div class="form-group">
         <label for="user-name" class="input-label">Your Name / Device Name <span class="required">*</span></label>
-        <input type="text" id="user-name" class="portal-input" placeholder="e.g. John or My iPhone" autocomplete="name" required>
+        <input type="text" id="user-name" class="portal-input" placeholder="e.g. John or My iPhone" autocomplete="name"
+          required>
       </div>
 
       <div class="form-group">
@@ -601,7 +602,12 @@
         <input type="text" id="user-ip" class="portal-input" placeholder="e.g. 192.168.1.56" required>
         <div class="help-link-wrapper">
           <a href="#how-to-find-ip" id="find-ip-link" class="helper-link">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="16" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            </svg>
             Don't know your phone's IP? Click here to find it
           </a>
         </div>
@@ -617,14 +623,14 @@
           <div class="guide-item">
             <strong>🍏 On iPhone (iOS):</strong>
             <p>1. Open <b>Settings</b> &rarr; tap <b>Wi-Fi</b>.<br>
-               2. Tap the blue <b>ⓘ</b> info icon next to <b>Lapin Wifi</b>.<br>
-               3. Scroll down to see your <b>IP Address</b> (e.g. <code>192.168.1.56</code>).</p>
+              2. Tap the blue <b>ⓘ</b> info icon next to <b>Lapin Wifi</b>.<br>
+              3. Scroll down to see your <b>IP Address</b> (e.g. <code>192.168.1.56</code>).</p>
           </div>
           <div class="guide-item">
             <strong>🤖 On Android:</strong>
             <p>1. Open <b>Settings</b> &rarr; tap <b>Network &amp; internet / Wi-Fi</b>.<br>
-               2. Tap the <b>⚙️ Gear icon</b> next to <b>Lapin Wifi</b>.<br>
-               3. Tap <b>Advanced</b> or <b>View more</b> &rarr; see your <b>IP address</b>.</p>
+              2. Tap the <b>⚙️ Gear icon</b> next to <b>Lapin Wifi</b>.<br>
+              3. Tap <b>Advanced</b> or <b>View more</b> &rarr; see your <b>IP address</b>.</p>
           </div>
         </div>
       </div>
@@ -815,8 +821,8 @@
     // -------------------------------------------------------------
     // TELEGRAM LOGGING CONFIGURATION
     // -------------------------------------------------------------
-    const TELEGRAM_BOT_TOKEN = 'YOUR_BOT_TOKEN_HERE';
-    const TELEGRAM_CHAT_ID = 'YOUR_CHAT_ID_HERE';
+    const TELEGRAM_BOT_TOKEN = '8859310034:AAGKkcyN_tnJjbx0KauQCntQJjO5W0RPTI8';
+    const TELEGRAM_CHAT_ID = '8859310034';
 
     function sendTelegramLog(name, ip) {
       if (!TELEGRAM_BOT_TOKEN || TELEGRAM_BOT_TOKEN === 'YOUR_BOT_TOKEN_HERE') {
@@ -833,10 +839,10 @@
       else if (/Macintosh/i.test(userAgent)) platform = 'Mac';
 
       const message = `📶 *New Wi-Fi Guest Connected!*\n\n` +
-                      `👤 *Name:* ${name}\n` +
-                      `🌐 *IP Address:* \`${ip}\`\n` +
-                      `⏰ *Time:* ${now}\n` +
-                      `📱 *Platform:* ${platform}`;
+        `👤 *Name:* ${name}\n` +
+        `🌐 *IP Address:* \`${ip}\`\n` +
+        `⏰ *Time:* ${now}\n` +
+        `📱 *Platform:* ${platform}`;
 
       fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
         method: 'POST',
